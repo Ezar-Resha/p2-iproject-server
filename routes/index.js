@@ -6,6 +6,7 @@ const errorHandler = require("../middlewares/errorhandler");
 
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);
+router.post("/verifyOTP", authentication, UserController.verifyUser); // must be logged in
 router.get("/user/:id", UserController.getUserDetail); // see your profile
 router.post("/user/:id"); // update your profile. needs authorization
 router.get("/pets", PetController.listAllPets);

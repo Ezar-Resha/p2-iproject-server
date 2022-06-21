@@ -45,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
             imageUrl: DataTypes.STRING,
+            OTP: DataTypes.STRING,
+            OTPExpiresAt: DataTypes.DATE,
+            verified: DataTypes.BOOLEAN,
         },
         {
             hooks: {
