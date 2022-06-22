@@ -7,9 +7,12 @@ const errorHandler = require("../middlewares/errorhandler");
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);
 router.post("/verifyOTP", authentication, UserController.verifyUser); // must be logged in
+
 router.get("/user/:id", UserController.getUserDetail); // see your profile
 router.post("/user/:id"); // update your profile. needs authorization
 router.get("/pets", PetController.listAllPets);
+router.get("/pets/breed", PetController.getDogBreed);
+router.post("/pets/uploadImage", PetController.uploadImage);
 router.get("/pets/:id", PetController.getPetDetail);
 router.put("/pets/:id", PetController.UpdatePetDetails); // has to be owner
 router.post("/pets", PetController.addPet);

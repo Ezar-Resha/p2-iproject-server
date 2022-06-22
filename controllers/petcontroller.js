@@ -1,6 +1,7 @@
 "use strict";
 
 const { Pet } = require("../models/index");
+const axios = require("axios").default;
 class PetController {
     static async listAllPets(req, res, next) {
         try {
@@ -89,10 +90,34 @@ class PetController {
             next(err);
         }
     }
+    static async getDogBreed(req, res, next) {
+        try {
+            let breed = await axios({
+                method: "get",
+                url: "https://api.thedogapi.com/v1/breeds",
+                headers: {
+                    "x-api-key": process.env.dogAPI_key,
+                },
+            });
+            let data = breed.data;
+            data.forEach((el) => {
+                delete el.weight;
+                delete el.height;
+                delete el.id;
+                delete el.reference_image_id;
+                delete el.image;
+            });
 
+            res.status(200).json({
+                statusCode: 200,
+                data,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
     static async UpdatePetDetails(req, res, next) {
         try {
-            console.log("test");
             const {
                 name,
                 gender,
@@ -144,6 +169,11 @@ class PetController {
         } catch (err) {
             next(err);
         }
+    }
+
+    static async uploadImage(req, res, next) {
+        console.log("hi masuk");
+        console.log(req.file);
     }
 }
 
