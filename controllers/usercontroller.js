@@ -5,13 +5,7 @@ const { convertPayloadToToken } = require("../helpers/jwt");
 const { hash, compare } = require("../helpers/bcrypt");
 const nodemailer = require("nodemailer");
 const user = require("../models/user.js");
-let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-        user: process.env.nodemailer_mail,
-        pass: process.env.nodemailer_pass,
-    },
-});
+const transporter = require("../helpers/nodemailer.js");
 
 class UserController {
     static async register(req, res, next) {
@@ -21,6 +15,7 @@ class UserController {
             const hashedOTP = hash(otp);
             var today = new Date();
             today.setHours(today.getHours() + 4);
+
             const newUser = await User.create({
                 username,
                 email,
@@ -152,6 +147,7 @@ class UserController {
             res.status(200).json({
                 statusCode: 200,
                 access_token: payload,
+                id: user.id,
                 username: user.username,
                 email: user.email,
             });

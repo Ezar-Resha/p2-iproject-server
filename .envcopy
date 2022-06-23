@@ -1,3 +1,12 @@
 SECRET_KEY;
-process.env.nodemailer_mail;
-process.env.nodemailer_pass;
+dogAPI_key;
+EMAIL;
+PASS;
+bucket_url;
+firebase_apiKey;
+firebase_authDomain;
+firebase_projectId;
+firebase_storageBucket;
+firebase_messangingSenderId;
+firebase_appId;
+firebase_measurementId;

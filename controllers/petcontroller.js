@@ -61,6 +61,8 @@ class PetController {
                 description,
             } = req.body;
 
+            // const UserId = req.user.id;
+
             const newPet = await Pet.create({
                 name,
                 gender,
@@ -169,11 +171,6 @@ class PetController {
         } catch (err) {
             next(err);
         }
-    }
-
-    static async uploadImage(req, res, next) {
-        console.log("hi masuk");
-        console.log(req.file);
     }
 }
 

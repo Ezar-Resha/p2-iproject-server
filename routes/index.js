@@ -1,21 +1,12 @@
 const router = require("express").Router();
-const UserController = require("../controllers/usercontroller");
-const PetController = require("../controllers/petcontroller");
+
 const authentication = require("../middlewares/authentication");
 const errorHandler = require("../middlewares/errorhandler");
 
-router.post("/login", UserController.login);
-router.post("/register", UserController.register);
-router.post("/verifyOTP", authentication, UserController.verifyUser); // must be logged in
-
-router.get("/user/:id", UserController.getUserDetail); // see your profile
-router.post("/user/:id"); // update your profile. needs authorization
-router.get("/pets", PetController.listAllPets);
-router.get("/pets/breed", PetController.getDogBreed);
-router.post("/pets/uploadImage", PetController.uploadImage);
-router.get("/pets/:id", PetController.getPetDetail);
-router.put("/pets/:id", PetController.UpdatePetDetails); // has to be owner
-router.post("/pets", PetController.addPet);
+router.use("", require("./user.js"));
+router.use("/pets", require("./pet.js"));
+router.use(authentication);
+router.use("/match", require("./match.js"));
 
 // get & post pet
 

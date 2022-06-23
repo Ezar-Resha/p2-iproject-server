@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: "OwnerId",
                 references: "id",
             });
+            Pet.hasMany(models.Match, { foreignKey: "PetId" });
         }
     }
     Pet.init(
@@ -85,6 +86,9 @@ module.exports = (sequelize, DataTypes) => {
             },
             imageUrl: DataTypes.STRING,
             description: DataTypes.TEXT,
+            OwnerId: {
+                type: DataTypes.INTEGER,
+            },
         },
         {
             sequelize,

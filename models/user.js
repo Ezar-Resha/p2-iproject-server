@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: "OwnerId",
                 references: "id",
             });
+            User.hasMany(models.Match, { foreignKey: "UserId" });
         }
     }
     User.init(
